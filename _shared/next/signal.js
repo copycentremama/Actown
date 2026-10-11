@@ -1,0 +1,10 @@
+import {services,steps} from '../content.js';
+import {enter,motionAllowed} from './motion.js';
+const stage=document.querySelector('.drawing-stage'),designButtons=[...document.querySelectorAll('button[data-design]')];
+const designNames={letters:'01 / БУКВЫ',navigation:'02 / НАВИГАЦИЯ',print:'03 / ПЕЧАТЬ'};
+designButtons.forEach(button=>button.addEventListener('click',()=>{stage.dataset.design=button.dataset.design;designButtons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));document.querySelector('.drawing-label').textContent=designNames[button.dataset.design];}));
+const choiceButtons=[...document.querySelectorAll('[data-choice]')],brief=document.querySelector('.service-brief'),action=document.querySelector('#brief-action');
+choiceButtons.forEach((b,i)=>b.addEventListener('click',()=>{choiceButtons.forEach((button,n)=>button.setAttribute('aria-pressed',String(n===i)));const s=services[i];document.querySelector('#brief-number').textContent=s.number+' / НАПРАВЛЕНИЕ';document.querySelector('#brief-title').textContent=s.title;document.querySelector('#brief-copy').textContent=s.text;document.querySelector('#brief-detail').textContent=s.detail;action.dataset.service=s.id;enter(brief);if(matchMedia('(max-width:700px)').matches)brief.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'center'});}));
+let phase=0;const phaseButtons=[...document.querySelectorAll('button[data-phase]')];
+function selectPhase(i){phase=i;document.querySelector('.assembly-visual').dataset.phase=String(i);phaseButtons.forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));document.querySelector('#phase-title').textContent=steps[i][0];document.querySelector('#phase-copy').textContent=steps[i][1];document.querySelector('#phase-next').textContent=i===3?'Вернуться к началу ↺':'Следующий этап →';enter(document.querySelector('.assembly-copy>div[aria-live]'));}
+phaseButtons.forEach((b,i)=>b.addEventListener('click',()=>selectPhase(i)));document.querySelector('#phase-next').addEventListener('click',()=>selectPhase((phase+1)%steps.length));

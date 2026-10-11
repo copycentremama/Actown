@@ -1,0 +1,7 @@
+/* Three deliberately separate compositions, one shared brand and interaction system. */
+.production-points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5%;margin-top:60px}.production-points article{border-top:1px solid currentColor;padding-top:24px}.production-points span{color:var(--green);display:block;font-size:18px;margin-bottom:24px}.production-points h3{font-size:30px;margin-bottom:18px}.production-points p{max-width:320px;color:var(--muted)}
+.hero-inner{animation:variant-in .7s both}@keyframes variant-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}.gallery-photo img{object-position:center!important}.gallery-photo{background:var(--green)}.gallery button:hover img{transform:scale(1.035)}.service button{transition:gap .2s}.hero:focus-within{outline:0}
+@media(max-width:700px){.production-points{grid-template-columns:1fr;gap:32px;margin-top:35px}.production-points article{padding-top:20px}.production-points h3{font-size:28px}.production-points span{margin-bottom:16px}.hero-inner{animation-duration:.4s}}
+@media(prefers-reduced-motion:reduce){.hero-inner{animation:none!important}}
+.gallery figcaption>span{white-space:nowrap;flex-shrink:0}
+@media(min-width:701px) and (max-width:1000px){.production-points{grid-template-columns:1.65fr 1fr 1fr;gap:4%}.production-points h3{font-size:24px}}
